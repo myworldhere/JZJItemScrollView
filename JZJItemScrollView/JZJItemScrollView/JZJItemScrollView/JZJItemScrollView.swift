@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol JZJItemScrollViewDelegate {
+@objc public  protocol JZJItemScrollViewDelegate {
     func itemScrollView(_ itemScorllView : JZJItemScrollView, didSelectedItemAt index:NSInteger)
 }
 
