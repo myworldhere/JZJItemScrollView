@@ -8,23 +8,23 @@
 
 import UIKit
 
-protocol JZJItemScrollViewDelegate {
+public protocol JZJItemScrollViewDelegate {
     func itemScrollView(_ itemScorllView : JZJItemScrollView, didSelectedItemAt index:NSInteger)
 }
 
-class JZJItemScrollView: UIView {
+public class JZJItemScrollView: UIView {
 
     fileprivate lazy var scrollView = UIScrollView()
     fileprivate lazy var allBtns = [UIButton]()
     fileprivate lazy var lineView = UIView()
     ///代理
-    var delegate : JZJItemScrollViewDelegate?
+   public var delegate : JZJItemScrollViewDelegate?
     
     
     /// 设置默认选中项
     ///
     /// - Parameter index: 默认选中项索引
-    func setDefaultSelectedItem(index : Int) {
+   public func setDefaultSelectedItem(index : Int) {
         
         let firstBtn = allBtns.first
         firstBtn?.isSelected = false
@@ -49,14 +49,14 @@ class JZJItemScrollView: UIView {
     ///   - selectedColor: 选中状态文本颜色
     ///   - hasSeperatorLine: 是否显示分割线
     ///   - normalColor: 普通状态文本颜色 默认为黑色
-    init(frame: CGRect, titles : [String], selectedColor : UIColor,hasSeperatorLine : Bool = false, normalColor : UIColor = UIColor.black) {
+   public init(frame: CGRect, titles : [String], selectedColor : UIColor,hasSeperatorLine : Bool = false, normalColor : UIColor = UIColor.black) {
         
         super.init(frame: frame)
         
         setupUI(titles: titles, selectedColor: selectedColor, normalColor: normalColor, hasSeperatorLine: hasSeperatorLine)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
