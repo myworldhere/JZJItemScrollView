@@ -15,10 +15,14 @@ import UIKit
 public class JZJItemScrollView: UIView {
 
     fileprivate lazy var scrollView = UIScrollView()
+    
     fileprivate lazy var allBtns = [UIButton]()
+    fileprivate lazy var allSeperatorLines = [UIView]()
     fileprivate lazy var lineView = UIView()
+    
+    
     ///代理
-   public var delegate : JZJItemScrollViewDelegate?
+    public var delegate : JZJItemScrollViewDelegate?
     
     
     /// 设置默认选中项
@@ -37,6 +41,20 @@ public class JZJItemScrollView: UIView {
         lineView.frame = generateFrameForLineView(btn: btn)
     }
     
+    /// 设置分割线信息
+    ///
+    /// - Parameters:
+    ///   - color: 颜色
+    ///   - lineWidth: 线宽
+    ///   - lineHeight: 线高
+    public func setSeperatorLineView(color: UIColor, lineWidth : CGFloat = 1, lineHeight : CGFloat = 20) {
+        
+        for lineView in allSeperatorLines {
+            lineView.backgroundColor = color
+            lineView.frame.size = CGSize(width: lineWidth, height: lineHeight)
+            lineView.frame.origin.y = (scrollView.bounds.height - lineHeight)/2
+        }
+    }
     
     
     
@@ -144,10 +162,11 @@ private extension JZJItemScrollView{
             
             scrollView.addSubview(btn)
             
-            if hasSeperatorLine && i != titles.count {
+            if hasSeperatorLine && i != titles.count - 1 {
                 let x = CGFloat(i+1) * btnWidth
-                let seperatorLineView = UIView(frame: CGRect(x: x, y: 5, width: 1, height: frame.height - 10))
+                let seperatorLineView = UIView(frame: CGRect(x: x, y: (scrollView.bounds.height - 20)/2, width: 1, height: 20))
                 seperatorLineView.backgroundColor = UIColor(red: 229/255.0, green: 229/255.0, blue: 229/255.0, alpha: 1)
+                allSeperatorLines.append(seperatorLineView)
                 scrollView.addSubview(seperatorLineView)
                 
                 
