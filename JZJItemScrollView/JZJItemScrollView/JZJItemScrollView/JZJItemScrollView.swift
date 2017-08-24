@@ -103,6 +103,7 @@ private extension JZJItemScrollView {
 private extension JZJItemScrollView{
     func setupUI(titles : [String], selectedColor : UIColor, normalColor : UIColor = UIColor.black, hasSeperatorLine : Bool = false){
         
+        backgroundColor = UIColor.white
         //1.设置滚动视图
         scrollView.frame = bounds
         scrollView.backgroundColor = UIColor.clear
@@ -123,6 +124,7 @@ private extension JZJItemScrollView{
             
             let btn = UIButton()
             btn.setTitle(title, for: .normal)
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             btn.setTitleColor(normalColor, for: .normal)
             btn.setTitleColor(selectedColor, for: .selected)
             btn.frame = CGRect(x: CGFloat(i)*btnWidth, y: 0, width: btnWidth, height: frame.height)
