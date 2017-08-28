@@ -22,7 +22,7 @@ public class JZJItemScrollView: UIView {
     
     
     ///代理
-    public var delegate : JZJItemScrollViewDelegate?
+    public weak var delegate : JZJItemScrollViewDelegate?
     
     
     /// 设置默认选中项
