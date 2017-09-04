@@ -14,9 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 
-        let scrollview = JZJItemScrollView(frame: CGRect(x: 0, y: 50, width: 320, height: 40), titles: ["作品信息","作品评论"], selectedColor: UIColor.blue, normalColor: .black, underlineHeight: 1.5)
+        let scrollview = JZJItemScrollView(frame: CGRect(x: 0, y: 50, width: 320, height: 40), titles: ["作品信息","作品评论"], selectedColor: UIColor.blue, normalColor: .black)
         scrollview.setDefaultSelectedItem(index: 1)
         scrollview.setSeperatorLineView(color: .red, lineWidth: 1, lineHeight: 20)
+        scrollview.setUnderlineHeight(height : 0.5)
+
         scrollview.delegate = self
         view.addSubview(scrollview)
     }

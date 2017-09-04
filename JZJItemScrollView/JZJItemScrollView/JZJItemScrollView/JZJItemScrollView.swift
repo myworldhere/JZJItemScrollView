@@ -25,7 +25,17 @@ public class JZJItemScrollView: UIView {
     public weak var delegate : JZJItemScrollViewDelegate?
     
     
-   
+    public func setUnderlineHeight(height : CGFloat) {
+        
+        if (0...2.5).contains(height) {
+            underlineHeight = height
+            
+            var frame = underlineView.frame
+            frame.size.height = height
+            frame.origin.y = self.frame.height - height
+            underlineView.frame = frame
+        }
+    }
    
     
     /// 设置默认选中项
@@ -72,14 +82,11 @@ public class JZJItemScrollView: UIView {
     ///   - selectedColor: 选中状态文本颜色
     ///   - hasSeperatorLine: 是否显示分割线
     ///   - normalColor: 普通状态文本颜色 默认为黑色
-    ///   - underlineHeight: 下划线高度 0~2.5
-    public init(frame: CGRect, titles : [String], selectedColor : UIColor, hasSeperatorLine : Bool = false, normalColor : UIColor = UIColor.black, underlineHeight : CGFloat = 1) {
+    public init(frame: CGRect, titles : [String], selectedColor : UIColor, hasSeperatorLine : Bool = false, normalColor : UIColor = UIColor.black) {
         
         super.init(frame: frame)
         
-        if (0...2.5).contains(underlineHeight) {
-            self.underlineHeight = underlineHeight
-        }
+       
         setupUI(titles: titles, selectedColor: selectedColor, normalColor: normalColor, hasSeperatorLine: hasSeperatorLine)
         
     }
