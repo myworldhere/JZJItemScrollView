@@ -18,12 +18,15 @@ public class JZJItemScrollView: UIView {
     
     fileprivate lazy var allBtns = [UIButton]()
     fileprivate lazy var allSeperatorLines = [UIView]()
-    fileprivate lazy var lineView = UIView()
-    
+    fileprivate lazy var underlineView = UIView()
+    fileprivate lazy var underlineHeight : CGFloat = 1
     
     ///代理
     public weak var delegate : JZJItemScrollViewDelegate?
     
+    
+   
+   
     
     /// 设置默认选中项
     ///
@@ -38,7 +41,7 @@ public class JZJItemScrollView: UIView {
         }
         let btn = allBtns[index]
         btn.isSelected = true
-        lineView.frame = generateFrameForLineView(btn: btn)
+        underlineView.frame = generateFrameForLineView(btn: btn)
     }
     
     /// 设置分割线信息
@@ -59,6 +62,8 @@ public class JZJItemScrollView: UIView {
     
     
     
+
+    
     /// 根据指定参数生成实例对象
     ///
     /// - Parameters:
@@ -67,11 +72,16 @@ public class JZJItemScrollView: UIView {
     ///   - selectedColor: 选中状态文本颜色
     ///   - hasSeperatorLine: 是否显示分割线
     ///   - normalColor: 普通状态文本颜色 默认为黑色
-   public init(frame: CGRect, titles : [String], selectedColor : UIColor,hasSeperatorLine : Bool = false, normalColor : UIColor = UIColor.black) {
+    ///   - underlineHeight: 下划线高度 0~2.5
+    public init(frame: CGRect, titles : [String], selectedColor : UIColor, hasSeperatorLine : Bool = false, normalColor : UIColor = UIColor.black, underlineHeight : CGFloat = 1) {
         
         super.init(frame: frame)
         
+        if (0...2.5).contains(underlineHeight) {
+            self.underlineHeight = underlineHeight
+        }
         setupUI(titles: titles, selectedColor: selectedColor, normalColor: normalColor, hasSeperatorLine: hasSeperatorLine)
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -101,7 +111,7 @@ private extension JZJItemScrollView {
     func underlineAnimation(btn : UIButton){
         
         UIView.animate(withDuration: 0.2) {
-            self.lineView.frame = self.generateFrameForLineView(btn: btn)
+            self.underlineView.frame = self.generateFrameForLineView(btn: btn)
         }
         
     }
@@ -113,7 +123,7 @@ private extension JZJItemScrollView {
         let size = (title as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.width, height: 1000.0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15)], context: nil).size
         let lineWidth = size.width + 10
         let x = btn.center.x - lineWidth / 2
-        return  CGRect(x: x, y: self.frame.height - 1, width: lineWidth, height: 1)
+        return  CGRect(x: x, y: self.frame.height - underlineHeight, width: lineWidth, height: underlineHeight)
     }
 
 }
@@ -146,14 +156,14 @@ private extension JZJItemScrollView{
             btn.setTitleColor(normalColor, for: .normal)
             btn.setTitleColor(selectedColor, for: .selected)
             btn.frame = CGRect(x: CGFloat(i)*btnWidth, y: 0, width: btnWidth, height: frame.height)
-            lineView.backgroundColor = selectedColor
+            underlineView.backgroundColor = selectedColor
              //设置下划线视图
             if i == 0 {
                 btn.isSelected = true
                 
-                lineView.frame = generateFrameForLineView(btn: btn)
+                underlineView.frame = generateFrameForLineView(btn: btn)
                 
-                scrollView.addSubview(lineView)
+                scrollView.addSubview(underlineView)
             }
             
             btn.tag = i
