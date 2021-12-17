@@ -127,7 +127,7 @@ private extension JZJItemScrollView {
         guard let title = btn.titleLabel?.text else {
             return CGRect()
         }
-        let size = (title as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.width, height: 1000.0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 15)], context: nil).size
+        let size = (title as NSString).boundingRect(with: CGSize(width: UIScreen.main.bounds.width, height: 1000.0), options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15)], context: nil).size
         let lineWidth = size.width + 10
         let x = btn.center.x - lineWidth / 2
         return  CGRect(x: x, y: self.frame.height - underlineHeight, width: lineWidth, height: underlineHeight)
